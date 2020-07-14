@@ -36,12 +36,14 @@ def generate_tex_file(expression, template_tex_file_body):
             outfile.write(new_body)
     return result
 
-
+# TODO:lynnporu remove CTEX completely, change
+# all compilation to XeLaTeX
 def tex_to_dvi(tex_file):
-    result = tex_file.replace(".tex", ".dvi" if not TEX_USE_CTEX else ".xdv")
+    result = tex_file.replace(".tex", ".xdv")
     if not os.path.exists(result):
         commands = [
-            "latex",
+            "xelatex",
+            "-no-pdf",
             "-interaction=batchmode",
             "-halt-on-error",
             "-output-directory=\"{}\"".format(consts.TEX_DIR),
@@ -62,8 +64,7 @@ def tex_to_dvi(tex_file):
         if exit_code != 0:
             log_file = tex_file.replace(".tex", ".log")
             raise Exception(
-                ("Latex error converting to dvi. " if not TEX_USE_CTEX
-                else "Xelatex error converting to xdv. ") +
+                "Xelatex error converting to xdv. " +
                 "See log output above or the log file: %s" % log_file)
     return result
 
@@ -75,7 +76,7 @@ def dvi_to_svg(dvi_file, regen_if_exists=False):
     Returns a list of PIL Image objects for these images sorted as they
     where in the dvi
     """
-    result = dvi_file.replace(".dvi" if not TEX_USE_CTEX else ".xdv", ".svg")
+    result = dvi_file.replace(".xdv", ".svg")
     if not os.path.exists(result):
         commands = [
             "dvisvgm",
