@@ -24,10 +24,11 @@ Those directories are created if they don't exist.
 
 Tex
 ---
-    TEX_TEXT_TO_REPLACE
-              Placeholder text used by manim when generating tex files
+
     TEMPLATE_TEX_FILE
               ``manim/tex_template.tex`` file which is being used as template.
+    TEMPLATE_TEX_OBJ
+              TexFile class which is being used for compiling .tex template.
 
 Numerical Constants
 -------------------
