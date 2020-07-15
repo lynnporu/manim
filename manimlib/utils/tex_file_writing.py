@@ -1,5 +1,6 @@
 import os
 import hashlib
+from pathlib import Path
 
 import manimlib.constants as consts
 
@@ -33,6 +34,9 @@ def generate_tex_file(expression, template_tex_file_body):
 
 def tex_to_dvi(tex_file):
     result = tex_file.replace(".tex", ".xdv")
+    result = Path(result).as_posix()
+    tex_file = Path(tex_file).as_posix()
+    tex_dir = Path(consts.TEX_DIR).as_posix()
     if not os.path.exists(result):
         exit_code = os.system(" ".join([
             # executing commands
@@ -40,7 +44,7 @@ def tex_to_dvi(tex_file):
             "-no-pdf",
             "-interaction=batchmode",
             "-halt-on-error",
-            "-output-directory=\"{}\"".format(consts.TEX_DIR),
+            "-output-directory=\"{}\"".format(tex_dir),
             "\"{}\"".format(tex_file),
             ">",
             os.devnull
@@ -61,6 +65,8 @@ def dvi_to_svg(dvi_file, regen_if_exists=False):
     where in the dvi
     """
     result = dvi_file.replace(".xdv", ".svg")
+    result = Path(result).as_posix()
+    dvi_file = Path(dvi_file).as_posix()
     if not os.path.exists(result):
         commands = [
             "dvisvgm",
