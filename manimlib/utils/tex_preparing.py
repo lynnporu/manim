@@ -78,11 +78,11 @@ class TexFile:
 				"%%!template:%s" % label, replace_by
 			)
 
-	def get_body_for_caption(self, caption: str) -> str:
+	def get_body(self, caption: str) -> str:
 		return self.templated_body.replace(
 			"%!template:content", caption)
 
-	def get_body_for_formula(self, formula: str) -> str:
+	def get_aligned_body(self, formula: str) -> str:
 		return self.templated_body.replace(
 			"%!template:content",
 			"\\begin{align*}\n%s\n\\end{align*}" % formula

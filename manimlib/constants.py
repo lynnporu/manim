@@ -1,6 +1,8 @@
 import numpy as np
 import os
 
+from manimlib.utils.tex_preparing import TexFile
+
 MEDIA_DIR = ""
 VIDEO_DIR = ""
 VIDEO_OUTPUT_DIR = ""
@@ -71,17 +73,11 @@ ITALIC = 'ITALIC'
 OBLIQUE = 'OBLIQUE'
 BOLD = 'BOLD'
 
-TEX_TEXT_TO_REPLACE = "YourTextHere"
 TEMPLATE_TEX_FILE = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),
     "tex_template.tex"
 )
-with open(TEMPLATE_TEX_FILE, "r") as infile:
-    TEMPLATE_TEXT_FILE_BODY = infile.read()
-    TEMPLATE_TEX_FILE_BODY = TEMPLATE_TEXT_FILE_BODY.replace(
-        TEX_TEXT_TO_REPLACE,
-        "\\begin{align*}\n" + TEX_TEXT_TO_REPLACE + "\n\\end{align*}",
-    )
+TEMPLATE_TEX_OBJ = TexFile(TEMPLATE_TEX_FILE)
 
 HELP_MESSAGE = """
    Usage:

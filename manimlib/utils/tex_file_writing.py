@@ -1,7 +1,6 @@
 import os
 import hashlib
 
-from manimlib.constants import TEX_TEXT_TO_REPLACE
 import manimlib.constants as consts
 
 
@@ -28,15 +27,10 @@ def generate_tex_file(expression, template_tex_file_body):
         print("Writing \"%s\" to %s" % (
             "".join(expression), result
         ))
-        new_body = template_tex_file_body.replace(
-            TEX_TEXT_TO_REPLACE, expression
-        )
         with open(result, "w", encoding="utf-8") as outfile:
-            outfile.write(new_body)
+            outfile.write(template_tex_file_body)
     return result
 
-# TODO:lynnporu remove CTEX completely, change
-# all compilation to XeLaTeX
 def tex_to_dvi(tex_file):
     result = tex_file.replace(".tex", ".xdv")
     if not os.path.exists(result):

@@ -1,5 +1,10 @@
 \documentclass[preview]{standalone}
 
+\usepackage{fontspec}
+\usepackage{xecyr}
+
+%!template:pre_packages
+
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{dsfont}
@@ -15,20 +20,16 @@
 \usepackage{xcolor}
 \usepackage{microtype}
 
-\usepackage{fontspec}
-\usepackage{xecyr}
-\usepackage{gfsneohellenicot}
+%!template:sans_font
+%!template:roman_font
+%!template:mono_font
 
-\setsansfont[Mapping=tex-text]{Source Sans Pro}
-\setromanfont[Mapping=tex-text]{Source Sans Pro}
-\setmonofont[Mapping=tex-text]{Liberation Mono}
-
-%\DisableLigatures{encoding = *, family = * }
-%\usepackage[UTF8]{ctex}
 \linespread{1}
+
+%!template:post_packages
 
 \begin{document}
 
-YourTextHere
+%!template:content
 
 \end{document}
