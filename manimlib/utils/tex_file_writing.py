@@ -2,7 +2,6 @@ import os
 import hashlib
 
 from manimlib.constants import TEX_TEXT_TO_REPLACE
-from manimlib.constants import TEX_USE_CTEX
 import manimlib.constants as consts
 
 
@@ -41,7 +40,8 @@ def generate_tex_file(expression, template_tex_file_body):
 def tex_to_dvi(tex_file):
     result = tex_file.replace(".tex", ".xdv")
     if not os.path.exists(result):
-        commands = [
+        exit_code = os.system(" ".join([
+            # executing commands
             "xelatex",
             "-no-pdf",
             "-interaction=batchmode",
@@ -50,17 +50,7 @@ def tex_to_dvi(tex_file):
             "\"{}\"".format(tex_file),
             ">",
             os.devnull
-        ] if not TEX_USE_CTEX else [
-            "xelatex",
-            "-no-pdf",
-            "-interaction=batchmode",
-            "-halt-on-error",
-            "-output-directory=\"{}\"".format(consts.TEX_DIR),
-            "\"{}\"".format(tex_file),
-            ">",
-            os.devnull
-        ]
-        exit_code = os.system(" ".join(commands))
+        ]))
         if exit_code != 0:
             log_file = tex_file.replace(".tex", ".log")
             raise Exception(
