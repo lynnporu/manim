@@ -83,10 +83,6 @@ class TexFile:
 			"%!template:content", caption)
 
 	def get_aligned_body(self, formula: str) -> str:
-		print(self.templated_body.replace(
-			"%!template:content",
-			"\\begin{align*}\n%s\n\\end{align*}" % formula
-		))
 		return self.templated_body.replace(
 			"%!template:content",
 			"\\begin{align*}\n%s\n\\end{align*}" % formula

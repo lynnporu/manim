@@ -32,6 +32,7 @@ class SingleStringTexMobject(SVGMobject):
         "height": None,
         "organize_left_to_right": False,
         "alignment": "",
+        "tex_body_func": TEMPLATE_TEX_OBJ.get_aligned_body
     }
 
     def __init__(self, tex_string, **kwargs):
@@ -41,7 +42,7 @@ class SingleStringTexMobject(SVGMobject):
         expression = self.get_modified_expression(tex_string)
         file_name = tex_to_svg_file(
             expression,
-            TEMPLATE_TEX_OBJ.get_aligned_body(expression)
+            self.tex_body_func(expression)
         )
         SVGMobject.__init__(self, file_name=file_name, **kwargs)
         if self.height is None:
@@ -138,6 +139,7 @@ class TexMobject(SingleStringTexMobject):
         "arg_separator": " ",
         "substrings_to_isolate": [],
         "tex_to_color_map": {},
+        "tex_body_func": TEMPLATE_TEX_OBJ.get_aligned_body
     }
 
     def __init__(self, *tex_strings, **kwargs):
@@ -249,6 +251,7 @@ class TextMobject(TexMobject):
     CONFIG = {
         "alignment": "\\centering",
         "arg_separator": "",
+        "tex_body_func": TEMPLATE_TEX_OBJ.get_body
     }
 
 
@@ -256,6 +259,7 @@ class BulletedList(TextMobject):
     CONFIG = {
         "buff": MED_LARGE_BUFF,
         "dot_scale_factor": 2,
+        "tex_body_func": TEMPLATE_TEX_OBJ.get_body,
         "alignment": "",
     }
 

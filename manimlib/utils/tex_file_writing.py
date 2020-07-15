@@ -4,8 +4,8 @@ import hashlib
 import manimlib.constants as consts
 
 
-def tex_hash(template_tex_file_body):
-    id_str = str(template_tex_file_body)
+def tex_hash(expression, template_tex_file_body):
+    id_str = str(expression + template_tex_file_body)
     hasher = hashlib.sha256()
     hasher.update(id_str.encode())
     # Truncating at 16 bytes for cleanliness
@@ -21,7 +21,7 @@ def tex_to_svg_file(expression, template_tex_file_body):
 def generate_tex_file(expression, template_tex_file_body):
     result = os.path.join(
         consts.TEX_DIR,
-        tex_hash(template_tex_file_body)
+        tex_hash(expression, template_tex_file_body)
     ) + ".tex"
     if not os.path.exists(result):
         print("Writing \"%s\" to %s" % (
