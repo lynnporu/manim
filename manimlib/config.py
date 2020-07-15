@@ -1,5 +1,4 @@
 import argparse
-import configparser
 import colour
 import importlib.util
 import os
@@ -18,8 +17,8 @@ def parse_cli():
         )
         parser.add_argument(
             "--presets",
-            default="presets.conf",
-            help="File of configuration presets. Take a look at README to have preset instructions."
+            default="manimlib/presets.conf",
+            help="File of configuration presets. manimlib/presets.conf by default."
         )
         parser.add_argument(
             "scene_names",
@@ -217,6 +216,7 @@ def get_configuration(args):
         "mono_font": args.mono_font,
         "pre_packages": args.pre_packages,
         "post_packages": args.post_packages,
+        "presets_file": args.presets,
     }
 
     # Camera configuration

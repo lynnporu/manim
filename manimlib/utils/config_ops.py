@@ -1,5 +1,6 @@
 import inspect
 import itertools as it
+from manimlib.constants import PRESETS
 
 
 def get_all_descendent_classes(Class):
@@ -19,6 +20,23 @@ def filtered_locals(caller_locals):
         result.pop(arg, caller_locals)
     return result
 
+def change_recursively(dictionary, key, value):
+    """Access the dict value by dot key and change it to `value` Example:
+    dot_access({"a":0}, "a",          ..) refers to d["a"]
+    dot_access({"a":{"b":0}}}, "a.b", ..) refers to d["a"]["b"]
+    """
+    nested = key.split(".")
+    current_level = dictionary[nested.pop(0)]
+    while nested:
+        current_level = current_level[nested.pop(0)]
+    current_level = value
+
+def parse_conf(value):
+    """Parse values from .conf file. Tread any number-like string as int,
+    true/false/yes/no as bool, others - as string.
+    """
+    print("set " + str(value))
+    return value
 
 def digest_config(obj, kwargs, caller_locals={}):
     """
@@ -36,6 +54,13 @@ def digest_config(obj, kwargs, caller_locals={}):
     while len(classes_in_hierarchy) > 0:
         Class = classes_in_hierarchy.pop()
         classes_in_hierarchy += Class.__bases__
+        class_name = Class.__name__
+        if class_name in PRESETS.sections():
+            for option in PRESETS.options(class_name):
+                change_recursively(
+                    Class.CONFIG,
+                    option,
+                    parse_conf(PRESETS.get(class_name, option)))
         if hasattr(Class, "CONFIG"):
             static_configs.append(Class.CONFIG)
 
