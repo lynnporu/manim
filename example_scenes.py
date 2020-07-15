@@ -17,7 +17,16 @@ from manimlib.imports import *
 
 class OpeningManimExample(Scene):
     def construct(self):
-        title = TextMobject("This is some \\LaTeX")
+        annotation = TextMobject("Here will be some cyrillic.")
+        self.play(
+            Write(annotation)
+        )
+        self.wait()
+        self.play(
+            FadeOut(annotation)
+        )
+
+        title = TextMobject("Тримай трохи \\LaTeX")
         basel = TexMobject(
             "\\sum_{n=1}^\\infty "
             "\\frac{1}{n^2} = \\frac{\\pi^2}{6}"
@@ -29,8 +38,8 @@ class OpeningManimExample(Scene):
         )
         self.wait()
 
-        transform_title = TextMobject("That was a transform")
-        transform_title.to_corner(UP + LEFT)
+        transform_title = TextMobject("Ура!")
+        transform_title.to_corner(UP)
         self.play(
             Transform(title, transform_title),
             LaggedStart(*map(FadeOutAndShiftDown, basel)),
@@ -38,7 +47,7 @@ class OpeningManimExample(Scene):
         self.wait()
 
         grid = NumberPlane()
-        grid_title = TextMobject("This is a grid")
+        grid_title = TextMobject("Це координатна сітка")
         grid_title.scale(1.5)
         grid_title.move_to(transform_title)
 
@@ -51,8 +60,7 @@ class OpeningManimExample(Scene):
         self.wait()
 
         grid_transform_title = TextMobject(
-            "That was a non-linear function \\\\"
-            "applied to the grid"
+            "Нелінійне перетворення до сітки"
         )
         grid_transform_title.move_to(grid_title, UL)
         grid.prepare_for_nonlinear_transform()
