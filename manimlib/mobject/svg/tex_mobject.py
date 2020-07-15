@@ -38,9 +38,10 @@ class SingleStringTexMobject(SVGMobject):
         digest_config(self, kwargs)
         assert(isinstance(tex_string, str))
         self.tex_string = tex_string
+        expression = self.get_modified_expression(tex_string)
         file_name = tex_to_svg_file(
-            TEMPLATE_TEX_OBJ.get_aligned_body(
-                self.get_modified_expression(tex_string))
+            expression,
+            TEMPLATE_TEX_OBJ.get_aligned_body(expression)
         )
         SVGMobject.__init__(self, file_name=file_name, **kwargs)
         if self.height is None:

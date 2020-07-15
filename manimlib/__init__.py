@@ -10,6 +10,7 @@ def main():
     if not args.livestream:
         config = manimlib.config.get_configuration(args)
         manimlib.constants.initialize_directories(config)
+        manimlib.constants.TEMPLATE_TEX_OBJ.configurate(config)
         manimlib.extract_scene.main(config)
     else:
         manimlib.stream_starter.start_livestream(

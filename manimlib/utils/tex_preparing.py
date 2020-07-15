@@ -83,7 +83,19 @@ class TexFile:
 			"%!template:content", caption)
 
 	def get_aligned_body(self, formula: str) -> str:
+		print(self.templated_body.replace(
+			"%!template:content",
+			"\\begin{align*}\n%s\n\\end{align*}" % formula
+		))
 		return self.templated_body.replace(
 			"%!template:content",
 			"\\begin{align*}\n%s\n\\end{align*}" % formula
 		)
+
+	def configurate(self, config):
+		"""Set self.state to configs given in `config`.
+		"""
+		for key in self.state.keys():
+			if key in config:
+				self.state[key] = config[key] or False
+		self.reapply_templates()
