@@ -24,7 +24,6 @@ class TexSymbol(VMobjectFromSVGPathstring):
 
 class SingleStringTexMobject(SVGMobject):
     CONFIG = {
-        "template_tex_file_body": TEMPLATE_TEX_FILE_BODY,
         "stroke_width": 0,
         "fill_opacity": 1.0,
         "background_stroke_width": 1,
@@ -33,15 +32,17 @@ class SingleStringTexMobject(SVGMobject):
         "height": None,
         "organize_left_to_right": False,
         "alignment": "",
+        "tex_body_func": TEMPLATE_TEX_OBJ.get_aligned_body
     }
 
     def __init__(self, tex_string, **kwargs):
         digest_config(self, kwargs)
         assert(isinstance(tex_string, str))
         self.tex_string = tex_string
+        expression = self.get_modified_expression(tex_string)
         file_name = tex_to_svg_file(
-            self.get_modified_expression(tex_string),
-            self.template_tex_file_body
+            expression,
+            self.tex_body_func(expression)
         )
         SVGMobject.__init__(self, file_name=file_name, **kwargs)
         if self.height is None:
@@ -138,6 +139,7 @@ class TexMobject(SingleStringTexMobject):
         "arg_separator": " ",
         "substrings_to_isolate": [],
         "tex_to_color_map": {},
+        "tex_body_func": TEMPLATE_TEX_OBJ.get_aligned_body
     }
 
     def __init__(self, *tex_strings, **kwargs):
@@ -247,9 +249,9 @@ class TexMobject(SingleStringTexMobject):
 
 class TextMobject(TexMobject):
     CONFIG = {
-        "template_tex_file_body": TEMPLATE_TEXT_FILE_BODY,
         "alignment": "\\centering",
         "arg_separator": "",
+        "tex_body_func": TEMPLATE_TEX_OBJ.get_body
     }
 
 
@@ -257,8 +259,7 @@ class BulletedList(TextMobject):
     CONFIG = {
         "buff": MED_LARGE_BUFF,
         "dot_scale_factor": 2,
-        # Have to include because of handle_multiple_args implementation
-        "template_tex_file_body": TEMPLATE_TEXT_FILE_BODY,
+        "tex_body_func": TEMPLATE_TEX_OBJ.get_body,
         "alignment": "",
     }
 

@@ -24,13 +24,11 @@ Those directories are created if they don't exist.
 
 Tex
 ---
-    TEX_USE_CTEX
-              A boolean value. Change it to True if you need to use Chinese typesetting.
-    TEX_TEXT_TO_REPLACE
-              Placeholder text used by manim when generating tex files
+
     TEMPLATE_TEX_FILE
-              By default ``manimlib/tex_template.tex`` is used. If ``TEX_USE_CTEX``
-              is set to True then ``manimlib/ctex_template.tex`` is used.
+              ``manim/tex_template.tex`` file which is being used as template.
+    TEMPLATE_TEX_OBJ
+              TexFile class which is being used for compiling .tex template.
 
 Numerical Constants
 -------------------

@@ -127,6 +127,28 @@ def parse_cli():
             "--tex_dir",
             help="directory to write tex",
         )
+        parser.add_argument(
+            "--sans-font",
+            help="Sans font that will be used to render your text."
+        )
+        parser.add_argument(
+            "--mono-font",
+            help="Mono font that will be used for your text."
+        )
+        parser.add_argument(
+            "--roman-font",
+            help="Roman font that will be used for your text."
+        )
+        parser.add_argument(
+            "--pre-packages",
+            nargs="*",
+            help="Names of XeLaTeX which will be located at the beginning of the .tex preamble."
+        )
+        parser.add_argument(
+            "--post-packages",
+            nargs="*",
+            help="Names of XeLaTeX which will be located at the beginning of the .tex preamble."
+        )
         return parser.parse_args()
     except argparse.ArgumentError as err:
         print(str(err))
@@ -184,6 +206,11 @@ def get_configuration(args):
         "video_dir": args.video_dir,
         "video_output_dir": args.video_output_dir,
         "tex_dir": args.tex_dir,
+        "sans_font": args.sans_font,
+        "roman_font": args.roman_font,
+        "mono_font": args.mono_font,
+        "pre_packages": args.pre_packages,
+        "post_packages": args.post_packages,
     }
 
     # Camera configuration

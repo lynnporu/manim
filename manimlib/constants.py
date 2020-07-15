@@ -1,6 +1,8 @@
 import numpy as np
 import os
 
+from manimlib.utils.tex_preparing import TexFile
+
 MEDIA_DIR = ""
 VIDEO_DIR = ""
 VIDEO_OUTPUT_DIR = ""
@@ -71,18 +73,11 @@ ITALIC = 'ITALIC'
 OBLIQUE = 'OBLIQUE'
 BOLD = 'BOLD'
 
-TEX_USE_CTEX = False
-TEX_TEXT_TO_REPLACE = "YourTextHere"
 TEMPLATE_TEX_FILE = os.path.join(
     os.path.dirname(os.path.realpath(__file__)),
-    "tex_template.tex" if not TEX_USE_CTEX else "ctex_template.tex"
+    "tex_template.tex"
 )
-with open(TEMPLATE_TEX_FILE, "r") as infile:
-    TEMPLATE_TEXT_FILE_BODY = infile.read()
-    TEMPLATE_TEX_FILE_BODY = TEMPLATE_TEXT_FILE_BODY.replace(
-        TEX_TEXT_TO_REPLACE,
-        "\\begin{align*}\n" + TEX_TEXT_TO_REPLACE + "\n\\end{align*}",
-    )
+TEMPLATE_TEX_OBJ = TexFile(TEMPLATE_TEX_FILE)
 
 HELP_MESSAGE = """
    Usage:
@@ -255,6 +250,15 @@ COLOR_MAP = {
     "LIGHT_PINK": "#DC75CD",
     "GREEN_SCREEN": "#00FF00",
     "ORANGE": "#FF862F",
+    "ORANGE18_500": "#FE5234",
+    "BROWN18_500": "#231F20",
+    "WHITE18_500": "#FDFFFC",
+    "BLUE18_500": "#6E44FF",
+    "ROSE18_500": "#DB5ABA",
+    "PURPLE18_500": "#FF054",
+    "GREEN18_500": "#62C370",
+    "SAND18_500": "#F19953",
+    "YELLOW18_500": "#F5D329"
 }
 PALETTE = list(COLOR_MAP.values())
 locals().update(COLOR_MAP)
