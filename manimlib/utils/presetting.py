@@ -12,6 +12,7 @@ class Presettable:
     def __new__(cls, *args, **kwargs):
         if not cls.CONFIGURATED:
             assign_presets(cls)
+            cls.CONFIGURATED = True
         return object.__new__(cls, *args, **kwargs)
 
 
@@ -20,7 +21,6 @@ def change_by_dot(dictionary, key, value):
     dot_access({"a":0},        "a",   ..) refers to d["a"]
     dot_access({"a":{"b":0}}}, "a.b", ..) refers to d["a"]["b"]
     """
-    print("changing")
 
     def replacer(dict_slice, value, key_slice, *rest_slices):
         # if current key_slice is the last, rest_slices evaluates to None

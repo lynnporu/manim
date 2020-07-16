@@ -47,6 +47,7 @@ def generate_tex_file(expression, template_tex_file_body):
             outfile.write(template_tex_file_body)
     return result
 
+
 def tex_to_dvi(tex_file):
     result = tex_file.replace(".tex", ".xdv")
     result = Path(result).as_posix()
