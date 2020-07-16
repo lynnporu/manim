@@ -5,6 +5,21 @@ from pathlib import Path
 import manimlib.constants as consts
 
 
+def clear_cache(config):
+    """Clear TEX_DIR path. May be useful in debugging or if you managed to
+    change .tex files there.
+    """
+
+    if not config["clear_cache"]:
+        return
+
+    for fname in os.listdir(consts.TEX_DIR):
+        fpath = os.path.join(consts.TEX_DIR, fname)
+        # user will see OSError here in case of some problems
+        if os.path.isfile(fpath):
+            os.unlink(fpath)
+
+
 def tex_hash(expression, template_tex_file_body):
     id_str = str(expression + template_tex_file_body)
     hasher = hashlib.sha256()

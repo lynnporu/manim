@@ -154,6 +154,11 @@ def parse_cli():
             nargs="*",
             help="Names of XeLaTeX which will be located at the beginning of the .tex preamble."
         )
+        parser.add_argument(
+            "--clear-cache",
+            action="store_true",
+            help="Recompile all .tex files before rendering."
+        )
         return parser.parse_args()
     except argparse.ArgumentError as err:
         print(str(err))
@@ -217,6 +222,7 @@ def get_configuration(args):
         "pre_packages": args.pre_packages,
         "post_packages": args.post_packages,
         "presets_file": args.presets,
+        "clear_cache": args.clear_cache
     }
 
     # Camera configuration
