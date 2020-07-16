@@ -3,6 +3,18 @@ import re
 from manimlib.constants import *
 
 
+class Presettable:
+    """Abstract class for classes which CONFIG may be preseted.
+    """
+    CONFIG = {}
+    CONFIGURATED = False
+
+    def __new__(cls, *args, **kwargs):
+        if not cls.CONFIGURATED:
+            assign_presets(cls)
+        return object.__new__(cls, *args, **kwargs)
+
+
 def change_by_dot(dictionary, key, value):
     """Access the dict value by dot key and change it to `value` Example:
     dot_access({"a":0},        "a",   ..) refers to d["a"]
@@ -23,11 +35,11 @@ def change_by_dot(dictionary, key, value):
 
 
 def assign_presets(obj):
-    """Sets CONFIG values of the given class as given in presets file in
-    manimlib/presets.conf.
+    """Sets CONFIG values of the UNINSTANTIATED class as given in presets file
+    in manimlib/presets.conf.
     """
 
-    class_name = obj.__class__.__name__
+    class_name = obj.__name__
     if class_name not in PRESETS.sections():
         return
 
