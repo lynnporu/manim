@@ -40,6 +40,9 @@ def generate_tex_file(expression, template_tex_file_body):
         tex_hash(expression, template_tex_file_body)
     ) + ".tex"
     if not os.path.exists(result):
+        print("Writing \"%s\" to %s" % (
+            "".join(expression), result
+        ))
         with open(result, "w", encoding="utf-8") as outfile:
             outfile.write(template_tex_file_body)
     return result

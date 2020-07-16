@@ -175,6 +175,12 @@ class TexMobject(SingleStringTexMobject):
         deeper based on the structure of tex_strings (as a list
         of tex_strings)
         """
+        if not self.submobjects:
+            raise Exception(
+                f"TeX-compiled object \"{str(self.tex_string)}\" does not "
+                "contain any symbol. Consider using font compatible with your "
+                "language. Use -h option to get help on font parameters."
+            )
         new_submobjects = []
         curr_index = 0
         config = dict(self.CONFIG)
