@@ -5,12 +5,12 @@ from pathlib import Path
 import manimlib.constants as consts
 
 
-def clear_cache(config):
+def clear_tex_cache(config):
     """Clear TEX_DIR path. May be useful in debugging or if you managed to
     change .tex files there.
     """
 
-    if not config["clear_cache"]:
+    if not config["clear_tex_cache"]:
         return
 
     for fname in os.listdir(consts.TEX_DIR):
@@ -40,9 +40,6 @@ def generate_tex_file(expression, template_tex_file_body):
         tex_hash(expression, template_tex_file_body)
     ) + ".tex"
     if not os.path.exists(result):
-        print("Writing \"%s\" to %s" % (
-            "".join(expression), result
-        ))
         with open(result, "w", encoding="utf-8") as outfile:
             outfile.write(template_tex_file_body)
     return result

@@ -155,7 +155,7 @@ def parse_cli():
             help="Names of XeLaTeX which will be located at the beginning of the .tex preamble."
         )
         parser.add_argument(
-            "--clear-cache",
+            "--clear-tex-cache",
             action="store_true",
             help="Recompile all .tex files before rendering."
         )
@@ -222,7 +222,7 @@ def get_configuration(args):
         "pre_packages": args.pre_packages,
         "post_packages": args.post_packages,
         "presets_file": args.presets,
-        "clear_cache": args.clear_cache
+        "clear_tex_cache": args.clear_tex_cache
     }
 
     # Camera configuration
