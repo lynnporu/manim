@@ -109,10 +109,10 @@ class SelfSimilarFractal(VMobject):
         return result
 
     def get_seed_shape(self):
-        raise Exception("Not implemented")
+        raise NotImplemented
 
     def arrange_subparts(self, *subparts):
-        raise Exception("Not implemented")
+        raise NotImplemented
 
 
 class Sierpinski(SelfSimilarFractal):
@@ -336,7 +336,7 @@ class FractalCurve(VMobject):
                 self.set_stroke(width=self.order_to_stroke_width_map[order])
 
     def get_anchor_points(self):
-        raise Exception("Not implemented")
+        raise NotImplemented
 
 
 class LindenmayerCurve(FractalCurve):
@@ -421,7 +421,7 @@ class SelfSimilarSpaceFillingCurve(FractalCurve):
         return points
 
     def generate_grid(self):
-        raise Exception("Not implemented")
+        raise NotImplemented
 
 
 class HilbertCurve(SelfSimilarSpaceFillingCurve):

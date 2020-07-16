@@ -16,6 +16,11 @@ def parse_cli():
             help="path to file holding the python code for the scene",
         )
         parser.add_argument(
+            "--presets",
+            default="manimlib/presets.conf",
+            help="File of configuration presets. manimlib/presets.conf by default."
+        )
+        parser.add_argument(
             "scene_names",
             nargs="*",
             help="Name of the Scene class you want to see",
@@ -149,6 +154,11 @@ def parse_cli():
             nargs="*",
             help="Names of XeLaTeX which will be located at the beginning of the .tex preamble."
         )
+        parser.add_argument(
+            "--clear-tex-cache",
+            action="store_true",
+            help="Recompile all .tex files before rendering."
+        )
         return parser.parse_args()
     except argparse.ArgumentError as err:
         print(str(err))
@@ -211,6 +221,8 @@ def get_configuration(args):
         "mono_font": args.mono_font,
         "pre_packages": args.pre_packages,
         "post_packages": args.post_packages,
+        "presets_file": args.presets,
+        "clear_tex_cache": args.clear_tex_cache
     }
 
     # Camera configuration

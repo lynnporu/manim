@@ -823,7 +823,7 @@ class Mobject(Container):
         return self.get_start(), self.get_end()
 
     def point_from_proportion(self, alpha):
-        raise Exception("Not implemented")
+        raise NotImplemented
 
     def get_pieces(self, n_pieces):
         template = self.copy()
@@ -1008,7 +1008,7 @@ class Mobject(Container):
         return self
 
     def align_points_with_larger(self, larger_mobject):
-        raise Exception("Not implemented")
+        raise NotImplemented
 
     def align_submobjects(self, mobject):
         mob1 = self

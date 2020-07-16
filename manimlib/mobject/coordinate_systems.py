@@ -8,15 +8,16 @@ from manimlib.mobject.geometry import Line
 from manimlib.mobject.number_line import NumberLine
 from manimlib.mobject.svg.tex_mobject import TexMobject
 from manimlib.mobject.types.vectorized_mobject import VGroup
-from manimlib.utils.config_ops import digest_config
 from manimlib.utils.config_ops import merge_dicts_recursively
 from manimlib.utils.simple_functions import binary_search
 from manimlib.utils.space_ops import angle_of_vector
 
+from manimlib.utils.presetting import Presettable
+
 # TODO: There should be much more code reuse between Axes, NumberPlane and GraphScene
 
 
-class CoordinateSystem():
+class CoordinateSystem(Presettable):
     """
     Abstract class for Axes and NumberPlane
     """
@@ -29,10 +30,10 @@ class CoordinateSystem():
     }
 
     def coords_to_point(self, *coords):
-        raise Exception("Not implemented")
+        raise NotImplemented
 
     def point_to_coords(self, point):
-        raise Exception("Not implemented")
+        raise NotImplemented
 
     def c2p(self, *coords):
         """Abbreviation for coords_to_point"""
@@ -43,7 +44,7 @@ class CoordinateSystem():
         return self.point_to_coords(point)
 
     def get_axes(self):
-        raise Exception("Not implemented")
+        raise NotImplemented
 
     def get_axis(self, index):
         return self.get_axes()[index]

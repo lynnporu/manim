@@ -2,12 +2,15 @@ import numpy as np
 import os
 
 from manimlib.utils.tex_preparing import TexFile
+import configparser
 
 MEDIA_DIR = ""
 VIDEO_DIR = ""
 VIDEO_OUTPUT_DIR = ""
 TEX_DIR = ""
 TEXT_DIR = ""
+
+PRESETS = configparser.ConfigParser()
 
 
 def initialize_directories(config):
@@ -53,6 +56,14 @@ def initialize_directories(config):
     for folder in [VIDEO_DIR, VIDEO_OUTPUT_DIR, TEX_DIR, TEXT_DIR]:
         if folder != "" and not os.path.exists(folder):
             os.makedirs(folder)
+
+def remember_presets(config):
+  global PRESETS
+  if not config["presets_file"]:
+    return
+
+  PRESETS.read_file(
+    open(config["presets_file"]))
 
 NOT_SETTING_FONT_MSG='''
 Warning:

@@ -23,7 +23,7 @@ class ShowPartial(Animation):
         )
 
     def get_bounds(self, alpha):
-        raise Exception("Not Implemented")
+        raise NotImplemented
 
 
 class ShowCreation(ShowPartial):

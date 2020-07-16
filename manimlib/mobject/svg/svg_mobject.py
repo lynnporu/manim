@@ -402,7 +402,7 @@ class VMobjectFromSVGPathstring(VMobject):
             # TODO, this is a suboptimal approximation
             new_points = np.append([new_points[0]], new_points, axis=0)
         elif command == "A":  # elliptical Arc
-            raise Exception("Not implemented")
+            raise NotImplemented
         elif command == "Z":  # closepath
             return
 

@@ -71,9 +71,8 @@ def soft_dict_update(d1, d2):
     Adds key values pairs of d2 to d1 only when d1 doesn't
     already have that key
     """
-    for key, value in list(d2.items()):
-        if key not in d1:
-            d1[key] = value
+    for k, v in d2.items():
+        d1.setdefault(k, v)
 
 
 def digest_locals(obj, keys=None):
